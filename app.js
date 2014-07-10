@@ -12,7 +12,7 @@ var server = http.createServer(function(req, res) {
 server.listen(process.env.PORT || 3000);
 
 /////
-
+/*
 var getWeatherAndYo = require('./get-weather-and-yo');
 var cronJob = require('cron').CronJob;
 var job = new cronJob({
@@ -24,5 +24,4 @@ var job = new cronJob({
     'timeZone': "Asia/Tokyo"
 });
 job.start();
-
-
+*/
