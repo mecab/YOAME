@@ -16,8 +16,8 @@ var getWeatherAndYo = function() {
 	console.log("Zzz... exit.");
 	return;
     }
-    if (dt.hours() != 7 && dt.hours() % 3 == 0) {
-	console.log("dt.hours() != 7 && dt.hours() % 3 == 0");
+    if (dt.hours() != 7 && dt.hours() % 3 != 0) {
+	console.log("dt.hours() != 7 && dt.hours() % 3 != 0");
 	return;
     }
 
