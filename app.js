@@ -10,3 +10,19 @@ var server = http.createServer(function(req, res) {
 });
 
 server.listen(process.env.PORT || 3000);
+
+/////
+
+var getWeatherAndYo = require('./get-weather-and-yo');
+var cronJob = require('cron').CronJob;
+var job = new cronJob({
+    'cronTime': "0 2 7-18/1 * * *",
+    'onTick': function() {
+	getWeatherAndYo();
+    },
+    'start': false,
+    'timeZone': "Asia/Tokyo"
+});
+job.start();
+
+
