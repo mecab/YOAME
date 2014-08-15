@@ -1,21 +1,25 @@
 var request = require('request');
 var E = require('linq');
 var moment = require('moment-timezone');
+var config = require('./config');
 
-var getWeatherAndYo = function() {
+var getWeatherAndYo = function(areaCode, apiToken) {
+    console.log(areaCode, apiToken);
 
     var options = {
-	'url': "http://api.openweathermap.org/data/2.5/forecast?q=shinagawa-ku,%20jp",
+	'url': "http://api.openweathermap.org/data/2.5/forecast?q=" + areaCode,
 	'json': true
     };
 
     var dt = moment().tz('Asia/Tokyo');
     console.log('hours: ' + dt.hours());
 
+    // Sleep in night
     if (dt.hours() > 20 || dt.hours() < 7) {
 	console.log("Zzz... exit.");
 	return;
     }
+    // Skip except 7am, 9am, 12noon, 15pm, 18pm, 20pm
     if (dt.hours() != 7 && dt.hours() % 3 != 0) {
 	console.log("dt.hours() != 7 && dt.hours() % 3 != 0");
 	return;
@@ -24,7 +28,7 @@ var getWeatherAndYo = function() {
     function yo() {
 	request.post({
 	    'url': "http://api.justyo.co/yoall/",
-	    'form': { 'api_token': 'YOUR_YO_API_TOKEN_HERE' }
+	    'form': { 'api_token': apiToken }
 	}, function(err, res, body) {
 	    if (err) {
 		console.log(err);
@@ -63,4 +67,10 @@ var getWeatherAndYo = function() {
 	}
     });
 }
-module.exports = getWeatherAndYo;
+
+var getWeatherAndYoForAll = function() {
+    E.from(config.areaList).forEach(function(area) {
+	getWeatherAndYo(area.areaCode, area.apiToken);
+    });
+}
+module.exports = getWeatherAndYoForAll;

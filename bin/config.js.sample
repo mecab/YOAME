@@ -1,0 +1,11 @@
+var areaList = [
+    {
+	'areaCode': "shinagawa-ku,%20jp",
+	'apiToken': "YOUR-YO-API-TOKEN-FOR-AREA1-HERE"
+    },
+    {
+	'areaCode': "shibuya-ku,%20jp",
+	'apiToken': "YOUR-YO-API-TOKEN-FOR-AREA2-HERE"
+    }
+]
+exports.areaList = areaList;
